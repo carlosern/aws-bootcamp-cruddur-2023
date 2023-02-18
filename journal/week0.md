@@ -63,6 +63,13 @@ I was able to install AWS CLI in my gitpod workspace defining a task in the .git
 ![2023-02-18 09 20 57 AWS Credential CLI](https://user-images.githubusercontent.com/9203226/219869958-3003a275-f8ba-41e4-a768-713373df4c0d.jpg)
 
 
+## Create a Billing Alarm
+
+I was able to create an Alarm in Cloudwatch of Type Metric Alarm using the EstimatedCharges Metric with a Static Threshold type of Value greater than $5
+
+![2023-02-18 10 14 18 billing alarm](https://user-images.githubusercontent.com/9203226/219870630-141010ab-e209-4de7-a91a-beaea0d00179.jpg)
+
+![2023-02-18 10 04 32 billing alarm sns confirmation](https://user-images.githubusercontent.com/9203226/219870627-f5311c32-8d9a-4160-99c7-4b353c72c5ff.jpg)
 
 
 ## Homework Challenges
