@@ -74,7 +74,9 @@ I was able to create an Alarm in Cloudwatch of Type Metric Alarm using the Estim
 
 ## Create a Budget
 
-I was able to create a Budget using the Monthly cost budget Template, with a budgeted amount of 5$
+I was able to create a Budget using the Monthly cost budget Template, with a budgeted amount of 5$.
+
+With this type of budget I will be notified when 1) actual spend reaches 85% 2) actual spend reaches 100% 3) if forecasted spend is expected to reach 100%.
 
 ![2023-02-18 10 20 00 Budget Alert](https://user-images.githubusercontent.com/9203226/219870972-e66b333f-4a3f-400d-b391-c1c9660d6a1d.jpg)
 
