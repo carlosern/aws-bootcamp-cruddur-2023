@@ -79,6 +79,20 @@ I was able to create a Budget using the Monthly cost budget Template, with a bud
 ![2023-02-18 10 20 00 Budget Alert](https://user-images.githubusercontent.com/9203226/219870972-e66b333f-4a3f-400d-b391-c1c9660d6a1d.jpg)
 
 
+
+
 # Homework Challenges
+
+### Retention setting of the Cloudwatch Logs
+
+I followed the recommendation for changing the Retention setting of the Cloudwatch Logs with the help of the app [auto-set-log-group-retention](https://serverlessrepo.aws.amazon.com/applications/arn:aws:serverlessrepo:us-east-1:374852340823:applications~auto-set-log-group-retention) , I think it could be useful because the Storage of the logs has its [pricing](https://aws.amazon.com/cloudwatch/pricing/) schema
+
+
+### Custom Password policy
+I  followed the recommendation for customizing the Password policy of the AWS IAM services:
+- Increased the minimum length to 10
+- Password expires in 30 days
+- Prevent password reuse from the past 5 changes
+- Must not be identical to your IAM username, AWS account name, or email address
 
 
