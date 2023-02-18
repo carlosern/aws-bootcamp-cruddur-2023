@@ -1,8 +1,8 @@
 # Week 0 — Billing and Architecture
 
-## Required Homework
+# Required Homework
 
-### Watched Chirag's Week 0 - Spend Considerations
+## Watched Chirag's Week 0 - Spend Considerations
 
 I just created a new AWS Account for this Bootcamp
 
@@ -23,21 +23,21 @@ After watching Chirag's Week 0 - Spend Considerations, I  created a Billing Alar
 Now I feel calm about the costs
 
 
-### Watched Ashish's Week 0 - Security Considerations
+## Watched Ashish's Week 0 - Security Considerations
 
 I watched the tips from Ashish's video, and I only took in consideration de MFA security, which I already had enabled. 
 
 The other services such as AWS Organization, AWS Organization SCP, AWS Cloud Trail I would take into account for a more mature AWS Account in the future
 
 
-### Recreate Conceptual Diagram in Lucid Charts or on a Napkin
+## Recreate Conceptual Diagram in Lucid Charts or on a Napkin
 
 I created a Conceptual diagram on a napkin, here is the photo
 
 ![conceptual diagram nakpin_600](https://user-images.githubusercontent.com/9203226/219868868-39638b68-af6e-4ff3-88a7-db3bcee8705e.jpg)
 
 
-### Recreate Logical Architectual Diagram in Lucid Charts
+## Recreate Logical Architectual Diagram in Lucid Charts
 
 I was able to recreate the diagram with no problem. I checked out the AWS Architecture Icons guidelines
 
@@ -72,6 +72,13 @@ I was able to create an Alarm in Cloudwatch of Type Metric Alarm using the Estim
 ![2023-02-18 10 04 32 billing alarm sns confirmation](https://user-images.githubusercontent.com/9203226/219870627-f5311c32-8d9a-4160-99c7-4b353c72c5ff.jpg)
 
 
-## Homework Challenges
+## Create a Budget
+
+I was able to create a Budget using the Monthly cost budget Template, with a budgeted amount of 5$
+
+![2023-02-18 10 20 00 Budget Alert](https://user-images.githubusercontent.com/9203226/219870972-e66b333f-4a3f-400d-b391-c1c9660d6a1d.jpg)
+
+
+# Homework Challenges
 
 
