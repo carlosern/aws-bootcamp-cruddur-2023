@@ -30,6 +30,12 @@ I watched the tips from Ashish's video, and I only took in consideration de MFA 
 The other services such as AWS Organization, AWS Organization SCP, AWS Cloud Trail I would take into account for a more mature AWS Account in the future
 
 
+### Recreate Conceptual Diagram in Lucid Charts or on a Napkin
+
+I created a Conceptual diagram on a napkin, here is the photo
+
+![conceptual diagram nakpin_600](https://user-images.githubusercontent.com/9203226/219868868-39638b68-af6e-4ff3-88a7-db3bcee8705e.jpg)
+
 
 ## Homework Challenges
 
