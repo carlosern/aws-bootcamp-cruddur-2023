@@ -23,6 +23,13 @@ After watching Chirag's Week 0 - Spend Considerations, I  created a Billing Alar
 Now I feel calm about the costs
 
 
+### Watched Ashish's Week 0 - Security Considerations
+
+I watched the tips from Ashish's video, and I only took in consideration de MFA security, which I already had enabled. 
+
+The other services such as AWS Organization, AWS Organization SCP, AWS Cloud Trail I would take into account for a more mature AWS Account in the future
+
+
 
 ## Homework Challenges
 
