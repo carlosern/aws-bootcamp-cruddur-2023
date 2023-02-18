@@ -50,6 +50,20 @@ This is my shared link [Logical Architectual Diagram in Lucid Charts](https://lu
 Here an image
 ![My Cruddur Logical Architectual Diagram](https://user-images.githubusercontent.com/9203226/219869240-608c309b-e2ce-4e75-9fc0-23a41b2ddcfe.jpeg)
 
+## Create an Admin User, 	Generate AWS Credentials, Installed AWS CLI
+
+I created an Admin User following the security recommendations. turned on MFA, and granted policies for the Billing Dashboard.
+
+I generated AWS Credentials and configured them in my Gitpod workspace
+
+### Installed AWS CLI
+
+I was able to install AWS CLI in my gitpod workspace defining a task in the .gitpod.yml, and configured my profile with my AWS credentials
+
+![2023-02-18 09 20 57 AWS Credential CLI](https://user-images.githubusercontent.com/9203226/219869958-3003a275-f8ba-41e4-a768-713373df4c0d.jpg)
+
+
+
 
 ## Homework Challenges
 
