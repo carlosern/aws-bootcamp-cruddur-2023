@@ -4,6 +4,7 @@ from flask_cors import CORS, cross_origin
 import os
 
 from services.home_activities import *
+from services.notification_activities import *
 from services.user_activities import *
 from services.create_activity import *
 from services.create_reply import *
@@ -112,6 +113,11 @@ def data_activities_reply(activity_uuid):
   else:
     return model['data'], 200
   return
+
+@app.route("/api/activities/notification", methods=['GET'])
+def data_notification():
+  data = NotificationActivities.run()
+  return data, 200
 
 if __name__ == "__main__":
   app.run(debug=True)
