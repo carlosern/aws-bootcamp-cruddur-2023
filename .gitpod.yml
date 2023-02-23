@@ -3,6 +3,8 @@ vscode:
   extensions:
     - 42Crunch.vscode-openapi
 
+    - cweijan.vscode-postgresql-client2
+
 tasks:
   - name: aws-cli
     env:
