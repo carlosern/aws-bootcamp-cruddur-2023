@@ -62,7 +62,7 @@ I was able to run Postgres in a container following de video instructions
 RUN apt-get update
 RUN apt-get install -y curl
 ```
-- Now,  I followed one of the best practices [how-to-keep-your-images-small](https://docs.docker.com/develop/dev-best-practices/#how-to-keep-your-images-small) and put all RUN commands in one line, as follows
+- Now,  I followed one of the best practices [how-to-keep-your-images-small](https://docs.docker.com/develop/dev-best-practices/#how-to-keep-your-images-small) and put all RUN commands in one line, and avoid this way creating an additional layer in the image.
 ```
 RUN pip3 install -r requirements.txt && apt-get update && apt-get install -y curl
 ```
