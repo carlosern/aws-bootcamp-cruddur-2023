@@ -2,6 +2,34 @@
 
 # Required Homework
 
+### Document the Notification Endpoint for the OpenAI Document
+
+I updated the openapi-3.0.yml using the help of the OpenAPI extension
+![2023-02-22 20 24 52 OpenApi file updated](https://user-images.githubusercontent.com/9203226/221331750-89ae14aa-e833-4656-8d8d-087eebf52135.jpg)
+
+### Write a Flask Backend Endpoint for Notifications
+
+I was able to implement the path for notification api
+![2023-02-22 20 29 51 backend api](https://user-images.githubusercontent.com/9203226/221331771-2e93fa24-91cc-42e2-845a-b31915070db3.jpg)
+
+### Write a React Page for Notifications
+
+I was able to implement the functions for notification page
+![2023-02-22 20 32 41 front api](https://user-images.githubusercontent.com/9203226/221331840-fa7fbb2d-93e9-4171-8f3c-3a606303067e.jpg)
+
+### Run DynamoDB Local Container and ensure it works
+I was able to run DynamoDB locally in a container following de video instructions
+![2023-02-22 20 18 20 dynamoDB Local Up and running](https://user-images.githubusercontent.com/9203226/221331891-7a40b372-b601-4a58-a36f-458be7382b45.jpg)
+
+### Run Postgres Container and ensure it works
+I was able to run Postgres in a container following de video instructions
+![2023-02-22 20 15 00 postgres up and running](https://user-images.githubusercontent.com/9203226/221331913-2140be67-6bd3-45f7-b396-d4953a74404c.jpg)
+
+
+
+
+
+
 
 # Homework Challenges
 
@@ -29,11 +57,11 @@
    ![2023-02-24 22 14 35 healtcheck](https://user-images.githubusercontent.com/9203226/221331413-c4b09856-e41a-400b-b374-fa699792aefb.jpg)
  
     
- ## Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
+ ### Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
   - I already have Docker Desktop on my local machine
   - I pulled images carlosern/front and carlosern/backend  from my dockerhub repository
   - The backend works without changes
-  - The fronted needs to get an updated ENV VAR for my localhost, something like this
+  - The frontend needed an updated ENV VAR for my localhost, something like this
 
   ```
   docker run -p 3000:3000 -d -e REACT_APP_BACKEND_URL='http://127.0.0.1:4567' carlosern/front
