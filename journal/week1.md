@@ -56,7 +56,17 @@ I was able to run Postgres in a container following de video instructions
   - I was able to set a heltcheck for the backend-flask container
    ![2023-02-24 22 14 35 healtcheck](https://user-images.githubusercontent.com/9203226/221331413-c4b09856-e41a-400b-b374-fa699792aefb.jpg)
  
-    
+ ### Research best practices of Dockerfiles and attempt to implement it in your Dockerfile
+  - For the healtcheck I had to install curl in the backend-flask container, and I followed an example as follows:
+```
+RUN apt-get update
+RUN apt-get install -y curl
+```
+- Now,  I followed one of the best practices [how-to-keep-your-images-small](https://docs.docker.com/develop/dev-best-practices/#how-to-keep-your-images-small) and put all RUN commands in one line, as follows
+```
+RUN pip3 install -r requirements.txt && apt-get update && apt-get install -y curl
+```
+
  ### Learn how to install Docker on your localmachine and get the same containers running outside of Gitpod / Codespaces
   - I already have Docker Desktop on my local machine
   - I pulled images carlosern/front and carlosern/backend  from my dockerhub repository
