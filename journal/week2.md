@@ -13,7 +13,7 @@ I successfully implemented Honeycomb with OTEL by following the weekly live stre
 
 ### Instrument AWS X-Ray
 
-I was able to implement Instrument AWS X-Ray by following the support video 
+I was able to implement Instrument AWS X-Ray by following the instructional video 
 
 ```jsx
 aws xray create-group \
@@ -66,6 +66,13 @@ Result
 ```
 
 ![2023-03-02 23 34 05 X Ray implemented](https://user-images.githubusercontent.com/9203226/222916770-9dbafda1-22cb-4c2f-8b68-f57c08cb3ed5.jpg)
+
+
+### Instrument AWS X-Ray Subsegments
+
+By following the instructional video, I successfully implemented AWS X-Ray subsegments for instrumentation
+
+![2023-03-04 12 48 21 X ray subsegment](https://user-images.githubusercontent.com/9203226/222918632-5f1dfb10-8928-43c3-8d57-b3b6e742262b.jpg)
 
 
 ### Configure custom logger to send to CloudWatch Logs
