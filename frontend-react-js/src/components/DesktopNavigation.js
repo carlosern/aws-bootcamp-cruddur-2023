@@ -32,7 +32,7 @@ export default function DesktopNavigation(props) {
   }
 
   return (
-    <nav>
+    <nav >
       <Logo className='logo' />
       <DesktopNavigationLink url="/" 
         name="Home"
