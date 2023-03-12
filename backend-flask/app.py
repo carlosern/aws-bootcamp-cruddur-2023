@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request
 from flask_cors import CORS, cross_origin
 import os
+import sys
 
 from services.home_activities import *
 from services.notification_activities import *
@@ -13,6 +14,10 @@ from services.message_groups import *
 from services.messages import *
 from services.create_message import *
 from services.show_activity import *
+
+#JWT
+from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
+
 #HONEYCOMB
 from opentelemetry import trace
 from opentelemetry.instrumentation.flask import FlaskInstrumentor
@@ -59,6 +64,12 @@ tracer = trace.get_tracer(__name__)
 
 app = Flask(__name__)
 
+cognito_jwt_token = CognitoJwtToken(
+  user_pool_id=os.getenv("AWS_COGNITO_USER_POOL_ID"), 
+  user_pool_client_id=os.getenv("AWS_COGNITO_USER_POOL_CLIENT_ID"),
+  region=os.getenv("AWS_DEFAULT_REGION")
+)
+
 
 #HONEYCOMB
 # Initialize automatic instrumentation with Flask
@@ -96,8 +107,10 @@ origins = [frontend, backend]
 cors = CORS(
   app, 
   resources={r"/api/*": {"origins": origins}},
-  expose_headers="location,link",
-  allow_headers="content-type,if-modified-since",
+  # expose_headers="location,link",
+  # allow_headers="content-type,if-modified-since",
+  headers=['Content-Type', 'Authorization'], 
+  expose_headers='Authorization',  
   methods="OPTIONS,GET,HEAD,POST"
 )
 
@@ -107,6 +120,22 @@ def after_request(response):
     timestamp = strftime('[%Y-%b-%d %H:%M]')
     LOGGER.error('%s %s %s %s %s %s', timestamp, request.remote_addr, request.method, request.scheme, request.full_path, response.status)
     return response
+
+def verify_token(request):
+    access_token = extract_access_token(request.headers)
+    try:
+        claims = cognito_jwt_token.verify(access_token)
+        # authenticated request
+        app.logger.debug("authenticated")
+        app.logger.debug(claims)
+        app.logger.debug(claims['username'])
+        return claims['username']
+    except TokenVerifyError as e:
+        # unauthenticated request
+        app.logger.debug(e)
+        app.logger.debug("unauthenticated")
+        return None
+
 
 @app.route("/api/message_groups", methods=['GET'])
 def data_message_groups():
@@ -146,7 +175,9 @@ def data_create_message():
 @app.route("/api/activities/home", methods=['GET'])
 @xray_recorder.capture('activities_home')
 def data_home():
-  data = HomeActivities.run(logger=LOGGER)
+  username = verify_token(request)
+  data = HomeActivities.run(username)
+
   return data, 200
 
 @app.route("/api/activities/@<string:handle>", methods=['GET'])
@@ -199,10 +230,14 @@ def data_activities_reply(activity_uuid):
     return model['data'], 200
   return
 
+
 @app.route("/api/activities/notification", methods=['GET'])
 def data_notification():
-  data = NotificationActivities.run()
+  username = verify_token(request)
+  data = NotificationActivities.run(username)
+
   return data, 200
+
 
 @app.route('/rollbar/test')
 def rollbar_test():
