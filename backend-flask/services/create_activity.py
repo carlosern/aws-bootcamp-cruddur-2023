@@ -1,12 +1,14 @@
 import uuid
 from datetime import datetime, timedelta, timezone
+
+# from lib.db import db
+
 class CreateActivity:
   def run(message, user_handle, ttl):
     model = {
       'errors': None,
       'data': None
     }
-
 
     now = datetime.now(timezone.utc).astimezone()
 
@@ -51,30 +53,17 @@ class CreateActivity:
         'expires_at': (now + ttl_offset).isoformat()
       }
     return model
-
   def create_activity(user_uuid, message, expires_at):
-    user_uuid=''
     sql = f"""
-      INSERT INTO activities (user_uuid, message, expires_at)
-      VALUES (
-        "{user_uuid}",
-        "{message}",
-        "{expires_at}"
-      )
+    INSERT INTO (
+      user_uuid,
+      message,
+      expires_at
+    )
+    VALUES (
+      "{user_uuid}",
+      "{message}",
+      "{expires_at}"
+    )
     """
-    print(sql)
-
-    try:
-      with pool.connection() as conn:
-        with conn.cursor() as cur:
-          cur.execute(sql)
-          conn.commit()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-        
-    finally:
-        if conn is not None:
-            cur.close()
-            conn.close()
-            print('Database connection closed.')
-      
+    #query_commit(sql)
