@@ -175,6 +175,9 @@ def data_create_message():
 @app.route("/api/activities/home", methods=['GET'])
 @xray_recorder.capture('activities_home')
 def data_home():
+  
+  print("CONSOLE activities_home", request)
+
   username = verify_token(request)
   data = HomeActivities.run(username)
 
@@ -202,7 +205,8 @@ def data_search():
 @app.route("/api/activities", methods=['POST','OPTIONS'])
 @cross_origin()
 def data_activities():
-  user_handle  = 'andrewbrown'
+  print("CONSOLE data_activities", request)
+  user_handle  = 'carlosern'
   message = request.json['message']
   ttl = request.json['ttl']
   model = CreateActivity.run(message, user_handle, ttl)
