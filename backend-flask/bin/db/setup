@@ -8,7 +8,7 @@ printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 schema_path="$(realpath .)/backend-flask/bin"
 echo $schema_path
 
-source "$schema_path/db-drop"
-source "$schema_path/db-create"
-source "$schema_path/db-schema-load"
-source "$schema_path/db-seed"
+source "$schema_path/db/drop"
+source "$schema_path/db/create"
+source "$schema_path/db/schema-load"
+source "$schema_path/db/seed"

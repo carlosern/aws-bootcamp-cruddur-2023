@@ -22,3 +22,8 @@ source venv/bin/activate
 ```
 pip install flask
 ```
+
+# Install Requirements
+```
+pip install -r requirements.txt
+```
