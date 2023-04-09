@@ -1,0 +1,21 @@
+#! /usr/bin/bash
+
+if [ -z "$1" ]; then
+    echo "No TABLE_NAME arg supplied"
+    exit 1
+fi
+
+TABLE_NAME=$1
+
+if [ "$2" = "prod" ]; then
+    echo "USING PRODUCTION"
+    ENDPOINT_URL=""
+else
+    echo "USING DEV"
+    ENDPOINT_URL="--endpoint-url=http://localhost:8000"
+fi
+
+echo "DELETING TABLE " $TABLE_NAME
+
+aws dynamodb delete-table $ENDPOINT_URL \
+--table-name $TABLE_NAME

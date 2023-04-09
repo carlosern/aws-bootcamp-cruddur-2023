@@ -1,0 +1,13 @@
+#! /usr/bin/bash
+
+if [ "$1" = "prod" ]; then
+    echo "USING PRODUCTION"
+    ENDPOINT_URL=""
+else
+    echo "USING DEV"
+    ENDPOINT_URL="--endpoint-url=http://localhost:8000"
+fi
+
+aws dynamodb list-tables $ENDPOINT_URL \
+--query TableNames \
+--output table

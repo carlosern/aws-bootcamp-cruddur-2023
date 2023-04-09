@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+# La linea anterior indica que esto es un archivo ejecutabl de python
+
+import boto3
+import sys
+
+attrs = {
+    'endpoint_url': 'http://localhost:8000'
+}
+
+if len(sys.argv) == 2:
+    if "prod" in sys.argv[1]:
+        attrs = {}
+
+dynamodb = boto3.resource('dynamodb', **attrs)
+
+table_name = 'cruddur-message'
+
+# Create the DynamoDB table.
+table = dynamodb.create_table(
+    TableName=table_name,
+    KeySchema=[
+        {
+            'AttributeName': 'pk',
+            'KeyType': 'HASH'
+        },
+        {
+            'AttributeName': 'sk',
+            'KeyType': 'RANGE'
+        }
+    ],
+    AttributeDefinitions=[
+        {
+            'AttributeName': 'pk',
+            'AttributeType': 'S'
+        },
+        {
+            'AttributeName': 'sk',
+            'AttributeType': 'S'
+        },
+    ],
+    ProvisionedThroughput={
+        'ReadCapacityUnits': 5,
+        'WriteCapacityUnits': 5
+    }
+)
+
+# Wait until the table exists.
+table.wait_until_exists()
+
+# Print out some data about the table.
+print(table)
