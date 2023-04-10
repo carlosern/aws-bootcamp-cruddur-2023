@@ -21,6 +21,32 @@ if len(sys.argv) == 2:
     attrs = {}
 dynamodb = boto3.client('dynamodb',**attrs)
 
+def get_user_uuids():
+  sql = """
+    SELECT 
+      users.uuid,
+      users.display_name,
+      users.handle
+    FROM users
+    WHERE
+      users.handle IN(
+        %(my_handle)s,
+        %(other_handle)s
+        )
+  """
+  users = db.query_array_json(sql,{
+    'my_handle':  'andrewbrown',
+    'other_handle': 'bayko'
+  })
+  my_user    = next((item for item in users if item["handle"] == 'andrewbrown'), None)
+  other_user = next((item for item in users if item["handle"] == 'bayko'), None)
+  results = {
+    'my_user': my_user,
+    'other_user': other_user
+  }
+  print('get_user_uuids')
+  print(results)
+  return results
 
 
 def create_message(client,message_group_uuid, created_at, message, my_user_uuid, my_user_display_name, my_user_handle):
