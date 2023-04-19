@@ -15,7 +15,7 @@ if len(sys.argv) == 2:
 
 dynamodb = boto3.resource('dynamodb', **attrs)
 
-table_name = 'cruddur-message'
+table_name = 'cruddur-messages'
 
 # Create the DynamoDB table.
 table = dynamodb.create_table(

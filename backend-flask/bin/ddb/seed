@@ -67,7 +67,7 @@ def create_message(client,message_group_uuid, created_at, message, my_user_uuid,
     'user_handle': {'S': my_user_handle}
   }
   # insert the record into the table
-  table_name = 'cruddur-message'
+  table_name = 'cruddur-messages'
   response = client.put_item(
     TableName=table_name,
     Item=record
@@ -77,7 +77,7 @@ def create_message(client,message_group_uuid, created_at, message, my_user_uuid,
 
 
 def create_message_group(client,message_group_uuid, my_user_uuid, last_message_at=None, message=None, other_user_uuid=None, other_user_display_name=None, other_user_handle=None):
-  table_name = 'cruddur-message'
+  table_name = 'cruddur-messages'
   record = {
     'pk':   {'S': f"GRP#{my_user_uuid}"},
     'sk':   {'S': last_message_at},
