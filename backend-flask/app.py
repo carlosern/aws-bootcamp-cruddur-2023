@@ -136,15 +136,39 @@ def verify_token(request):
         app.logger.debug("unauthenticated")
         return None
 
+def get_cognito_user_id(request):
+    app.logger.debug("==get_cognito_user_id==")
+    access_token = extract_access_token(request.headers)
+    try:
+        claims = cognito_jwt_token.verify(access_token)
+        # authenticated request
+        app.logger.debug("authenticated")
+        app.logger.debug(claims)
+        return claims['sub']
+    except TokenVerifyError as e:
+        # unauthenticated request
+        app.logger.debug(e)
+        app.logger.debug("unauthenticated")
+        return None
+
 
 @app.route("/api/message_groups", methods=['GET'])
-def data_message_groups():
-  user_handle  = 'andrewbrown'
-  model = MessageGroups.run(user_handle=user_handle)
-  if model['errors'] is not None:
-    return model['errors'], 422
-  else:
+def data_message_groups():  
+  cognito_user_id = get_cognito_user_id(request)
+  if cognito_user_id is not None:    
+    model = MessageGroups.run(cognito_user_id=cognito_user_id)
     return model['data'], 200
+  else:
+    return {}, 401
+    #401 es no authenticado
+    #403 es que aunque esta autenticado, no tiene el permiso para ese recurso
+  
+  #user_handle  = 'andrewbrown'
+  # model = MessageGroups.run(user_handle=user_handle)
+  # if model['errors'] is not None:
+  #   return model['errors'], 401
+  # else:
+  #   return model['data'], 200
 
 @app.route("/api/messages/@<string:handle>", methods=['GET'])
 def data_messages(handle):

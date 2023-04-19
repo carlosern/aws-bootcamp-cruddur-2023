@@ -20,8 +20,9 @@ export default function ActivityForm(props) {
       const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/messages`
       console.log('onsubmit payload', message)
       const res = await fetch(backend_url, {
-        method: "POST",
+        method: "POST",            
         headers: {
+          'Authorization': `Bearer ${localStorage.getItem("access_token")}`,
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
