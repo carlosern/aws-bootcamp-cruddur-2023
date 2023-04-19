@@ -5,8 +5,8 @@ NO_COLOR='\033[0m'
 LABEL="db-schema-load"
 printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
 
-schema_path="$(realpath .)/backend-flask/db/schema.sql"
-echo $schema_path
+schema_path1="$(realpath .)/backend-flask/db/schema.sql"
+echo $schema_path1
 
 if [ "$1" = "prod" ]; then
     echo "USING PRODUCTION"
@@ -16,4 +16,4 @@ else
     CON_URL=$CONNECTION_URL
 fi
 
-psql $CON_URL cruddur < $schema_path
+psql $CON_URL cruddur < $schema_path1
