@@ -170,17 +170,25 @@ def data_message_groups():
   # else:
   #   return model['data'], 200
 
-@app.route("/api/messages/@<string:handle>", methods=['GET'])
-def data_messages(handle):
-  user_sender_handle = 'andrewbrown'
-  user_receiver_handle = request.args.get('user_reciever_handle')
+@app.route("/api/messages/@<string:message_group_uuid>", methods=['GET'])
+def data_messages(message_group_uuid):
+  # user_sender_handle = 'andrewbrown'
+  # user_receiver_handle = request.args.get('user_reciever_handle')
 
-  model = Messages.run(user_sender_handle=user_sender_handle, user_receiver_handle=user_receiver_handle)
-  if model['errors'] is not None:
-    return model['errors'], 422
-  else:
+  # model = Messages.run(user_sender_handle=user_sender_handle, user_receiver_handle=user_receiver_handle)
+  cognito_user_id = get_cognito_user_id(request)
+  if cognito_user_id is not None:    
+    model = Messages.run(cognito_user_id=cognito_user_id, message_group_uuid=message_group_uuid)
     return model['data'], 200
-  return
+  else:
+    return {}, 401
+
+  
+  # if model['errors'] is not None:
+  #   return model['errors'], 422
+  # else:
+  #   return model['data'], 200
+  # return
 
 @app.route("/api/messages", methods=['POST','OPTIONS'])
 @cross_origin()
