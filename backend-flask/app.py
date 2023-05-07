@@ -84,21 +84,22 @@ XRayMiddleware(app, xray_recorder)
 #ROLLBAR
 rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
 
-@app.before_first_request
-def init_rollbar():
-    """init rollbar module"""
-    rollbar.init(
-        # access token
-        rollbar_access_token,
-        # environment name
-        'production',
-        # server root directory, makes tracebacks prettier
-        root=os.path.dirname(os.path.realpath(__file__)),
-        # flask already sets up logging
-        allow_logging_basic_config=False)
+#@app.before_first_request
+with app.app_context():
+  def init_rollbar():
+      """init rollbar module"""
+      rollbar.init(
+          # access token
+          rollbar_access_token,
+          # environment name
+          'production',
+          # server root directory, makes tracebacks prettier
+          root=os.path.dirname(os.path.realpath(__file__)),
+          # flask already sets up logging
+          allow_logging_basic_config=False)
 
-    # send exceptions from `app` to rollbar, using flask's signal system.
-    got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
+      # send exceptions from `app` to rollbar, using flask's signal system.
+      got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
 
 
 frontend = os.getenv('FRONTEND_URL')
@@ -155,6 +156,8 @@ def get_cognito_user_id(request):
 @app.route("/api/message_groups", methods=['GET'])
 def data_message_groups():  
   cognito_user_id = get_cognito_user_id(request)
+  app.logger.debug("==================cognito_user_id======================")
+  app.logger.debug(cognito_user_id)
   if cognito_user_id is not None:    
     model = MessageGroups.run(cognito_user_id=cognito_user_id)
     return model['data'], 200
