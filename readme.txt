@@ -1,3 +1,5 @@
+Iniciar el Docker Compose
+
 Crear BD postgres local
 ./backend-flask/bin/db/setup 
 
