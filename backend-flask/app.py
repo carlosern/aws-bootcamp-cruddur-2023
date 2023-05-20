@@ -173,18 +173,21 @@ def data_message_groups():
   # else:
   #   return model['data'], 200
 
-@app.route("/api/messages/@<string:message_group_uuid>", methods=['GET'])
+@app.route("/api/messages/<string:message_group_uuid>", methods=['GET'])
 def data_messages(message_group_uuid):
+  app.logger.debug("==================data_messages======================")
+  app.logger.debug(message_group_uuid)
   # user_sender_handle = 'andrewbrown'
   # user_receiver_handle = request.args.get('user_reciever_handle')
 
   # model = Messages.run(user_sender_handle=user_sender_handle, user_receiver_handle=user_receiver_handle)
+  
   cognito_user_id = get_cognito_user_id(request)
   if cognito_user_id is not None:    
-    model = Messages.run(cognito_user_id=cognito_user_id, message_group_uuid=message_group_uuid)
+    model = Messages.run(message_group_uuid=message_group_uuid, cognito_user_id=cognito_user_id)
     return model['data'], 200
   else:
-    return {}, 401
+    return {}, 501
 
   
   # if model['errors'] is not None:
