@@ -14,6 +14,7 @@ from services.message_groups import *
 from services.messages import *
 from services.create_message import *
 from services.show_activity import *
+from services.users_short import *
 
 #JWT
 from lib.cognito_jwt_token import CognitoJwtToken, extract_access_token, TokenVerifyError
@@ -205,7 +206,7 @@ def data_create_message():
   message = request.json['message'] #este siempre se espera que exista
 
   app.logger.debug("==================data_create_message======================")
-  app.logger.debug(request)
+  app.logger.debug(request.get_json())
 
   cognito_user_id = get_cognito_user_id(request)
 
@@ -311,6 +312,11 @@ def data_notification():
 def rollbar_test():
     rollbar.report_message('Hello World!', 'warning')
     return "Hello World!"
-    
+
+@app.route("/api/users/@<string:handle>/short", methods=['GET'])
+def data_users_short(handle):
+  data = UsersShort.run(handle)
+  return data, 200
+
 if __name__ == "__main__":
   app.run(debug=True)

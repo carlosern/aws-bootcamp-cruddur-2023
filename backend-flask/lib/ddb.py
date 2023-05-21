@@ -1,4 +1,5 @@
 import boto3
+import botocore.exceptions
 import sys
 from datetime import datetime, timedelta, timezone
 import uuid
@@ -86,7 +87,7 @@ class Ddb:
     last_message_at = now
     created_at = now
 
-    message_group = {
+    my_message_group = {
       'pk': {'S': f"GRP#{my_user_uuid}"},
       'sk': {'S': last_message_at},
       'message_group_uuid': {'S': message_group_uuid},
@@ -94,6 +95,15 @@ class Ddb:
       'user_uuid': {'S': other_user_uuid},
       'user_display_name': {'S': other_user_display_name},
       'user_handle':  {'S': other_user_handle}
+    }
+    other_message_group = {
+      'pk': {'S': f"GRP#{other_user_uuid}"},
+      'sk': {'S': last_message_at},
+      'message_group_uuid': {'S': message_group_uuid},
+      'message': {'S': message},
+      'user_uuid': {'S': my_user_uuid},
+      'user_display_name': {'S': my_user_display_name},
+      'user_handle':  {'S': my_user_handle}
     }
 
     message = {
@@ -108,26 +118,31 @@ class Ddb:
 
     items = {
       table_name: [
-        {'Put': {'Item': message_group}},
-        {'Put': {'Item': message}}
+        {'PutRequest': {'Item': my_message_group}},
+        {'PutRequest': {'Item': other_message_group}},
+        {'PutRequest': {'Item': message}}
       ]
     }
-    return {
-      'message_group_uuid': message_group_uuid,
-      'uuid': my_user_uuid,
-      'display_name': my_user_display_name,
-      'handle':  my_user_handle,
-      'message': message,
-      'created_at': created_at
-    }
+    # return {
+    #   'message_group_uuid': message_group_uuid,
+    #   'uuid': my_user_uuid,
+    #   'display_name': my_user_display_name,
+    #   'handle':  my_user_handle,
+    #   'message': message,
+    #   'created_at': created_at
+    # }
 
     try:
       # Begin the transaction
-      with dynamodb_resource.meta.client.transact_write_items(RequestItems=items) as transaction:
-        print('Transaction started.')
+      # with dynamodb_resource.meta.client.transact_write_items(RequestItems=items) as transaction:      
+        # print('Transaction started.')
         # Commit the transaction
-        response = transaction.commit()
-        print('Transaction committed.')
+        # response = transaction.commit()
+        # print('Transaction committed.')
+        response = client.batch_write_item(RequestItems=items)
+        return {
+          'message_group_uuid': message_group_uuid
+        }
         print(response)
     except ClientError as e:
       # Handle any errors
