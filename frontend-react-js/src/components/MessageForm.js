@@ -19,6 +19,22 @@ export default function ActivityForm(props) {
     try {
       const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/messages`
       console.log('onsubmit payload', message)
+
+      let json = {
+        message: message
+      }
+      /*el mecanismo es: un mensaje nuevo a una conversaion existente, se pasa el message_group_uuid, 
+        pero si es un mensaje nuevo en una conversaion nueva, solo se tiene el hable
+      */
+      if (params.handle) {
+        json.handle = params.handle
+      }
+      else {
+        json.message_group_uuid = params.message_group_uuid
+      }
+      
+
+      console.log('json', json)
       const res = await fetch(backend_url, {
         method: "POST",            
         headers: {
@@ -26,10 +42,7 @@ export default function ActivityForm(props) {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          message: message,
-          user_receiver_handle: params.handle
-        }),
+        body: JSON.stringify(json),
       });
       let data = await res.json();
       if (res.status === 200) {
