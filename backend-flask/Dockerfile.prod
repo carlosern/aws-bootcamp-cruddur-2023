@@ -11,6 +11,6 @@ COPY start.sh start.sh
 COPY . .
 
 EXPOSE ${PORT}
-CMD sh start.sh
+CMD sh start.prod.sh
 #CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
 

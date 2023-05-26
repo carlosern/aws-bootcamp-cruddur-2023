@@ -312,10 +312,10 @@ def data_notification():
 def health_check():
   return {'success': True}, 200
 
-# @app.route('/rollbar/test')
-# def rollbar_test():
-#     rollbar.report_message('Hello World!', 'warning')
-#     return "Hello World!"
+@app.route('/rollbar/test')
+def rollbar_test():
+    rollbar.report_message('Hello World!', 'warning')
+    return "Hello World!"
 
 @app.route("/api/users/@<string:handle>/short", methods=['GET'])
 def data_users_short(handle):
