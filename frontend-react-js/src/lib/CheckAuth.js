@@ -10,7 +10,7 @@ import { Auth } from 'aws-amplify';
       bypassCache: false 
     })
     .then((user) => {
-      console.log('user',user);
+      //console.log('user',user);
       return Auth.currentAuthenticatedUser()
     }).then((cognito_user) => {
         setUser({
