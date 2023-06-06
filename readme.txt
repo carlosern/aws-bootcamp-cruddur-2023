@@ -1,7 +1,10 @@
+Conectarse a ECR
+./bin/ecr/login 
+
 Iniciar el Docker Compose
 
 Crear BD postgres local
-./backend-flask/bin/db/setup 
+./bin/db/setup 
 
 Poblar con datos de prueba
 ./backend-flask/bin/db/seed 

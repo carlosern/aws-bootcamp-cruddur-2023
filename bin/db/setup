@@ -1,15 +1,16 @@
-#! /usr/bin/bash 
+#! /usr/bin/bash
+set -e # stop if it fails at any point
 
 CYAN='\033[1;36m'
 NO_COLOR='\033[0m'
 LABEL="db-setup"
-printf "${CYAN}== ${LABEL}${NO_COLOR}\n"
+printf "${CYAN}==== ${LABEL}${NO_COLOR}\n"
 
-schema_path="$(realpath .)/backend-flask/bin/db"
-echo $schema_path
+ABS_PATH=$(readlink -f "$0")
+DB_PATH=$(dirname $ABS_PATH)
 
-source "$schema_path/drop"
-source "$schema_path/create"
-source "$schema_path/schema-load"
-source "$schema_path/seed"
-"$schema_path/update_cognito_user_ids"
+source "$DB_PATH/drop"
+source "$DB_PATH/create"
+source "$DB_PATH/schema-load"
+source "$DB_PATH/seed"
+python "$DB_PATH/update_cognito_user_ids"
