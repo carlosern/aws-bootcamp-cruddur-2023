@@ -9,7 +9,7 @@ import ActivityForm from '../components/ActivityForm';
 
 // [TODO] Authenication
 //import Cookies from 'js-cookie'
-import CheckAuth from '../lib/CheckAuth'
+import {checkAuth, getAccessToken}  from '../lib/CheckAuth'
 
 export default function UserFeedPage() {
   const [activities, setActivities] = React.useState([]);
@@ -23,9 +23,11 @@ export default function UserFeedPage() {
   const loadData = async () => {
     try {
       const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/${title}`
+      await getAccessToken()
+      const access_token = localStorage.getItem("access_token")      
       const res = await fetch(backend_url, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`
+          Authorization: `Bearer ${access_token}`
         },           
         method: "GET"
       });
@@ -76,7 +78,7 @@ export default function UserFeedPage() {
     dataFetchedRef.current = true;
 
     loadData();
-    CheckAuth(setUser);
+    checkAuth(setUser);
   }, [])
 
   return (

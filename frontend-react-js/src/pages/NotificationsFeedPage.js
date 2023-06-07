@@ -9,7 +9,7 @@ import ReplyForm from '../components/ReplyForm';
 
 // [TODO] Authenication
 //import Cookies from 'js-cookie'
-import CheckAuth from '../lib/CheckAuth'
+import {checkAuth, getAccessToken}  from '../lib/CheckAuth'
 
 
 export default function NotificationsFeedPage() {
@@ -23,10 +23,12 @@ export default function NotificationsFeedPage() {
   const loadData = async () => {
     try {
       const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/notification`
+      await getAccessToken()
+      const access_token = localStorage.getItem("access_token")      
       const res = await fetch(backend_url, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`
-        },           
+          Authorization: `Bearer ${access_token}`
+        },          
         method: "GET"
       });
       let resJson = await res.json();
@@ -66,7 +68,7 @@ export default function NotificationsFeedPage() {
     dataFetchedRef.current = true;
 
     loadData();
-    CheckAuth(setUser);
+    checkAuth(setUser);
   }, [])
 
   return (
