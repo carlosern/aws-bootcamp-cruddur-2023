@@ -1,3 +1,5 @@
+CORRER LA APP LOCAL
+
 Conectarse a ECR
 ./bin/ecr/login 
 
