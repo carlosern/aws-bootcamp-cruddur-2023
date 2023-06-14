@@ -97,7 +97,7 @@ def create_message_group(client,message_group_uuid, my_user_uuid, last_message_a
 message_group_uuid = "5ae290ed-55d1-47a0-bc6d-fe2bc2700399" #str(uuid.uuid4())
 users = get_user_uuids()
 
-now = datetime.now(timezone.utc).astimezone()
+now = datetime.now()
 
 create_message_group(
   client=dynamodb,
@@ -245,7 +245,7 @@ for i in range(len(lines)):
 
   # print(message)
 
-  created_at = (now + timedelta(minutes=i)).isoformat()
+  created_at = (now - timedelta(days=1) + timedelta(minutes=i)).isoformat()
   create_message(
     client=dynamodb,
     message_group_uuid= message_group_uuid,

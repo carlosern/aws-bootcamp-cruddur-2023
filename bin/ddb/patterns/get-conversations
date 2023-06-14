@@ -52,6 +52,8 @@ for item in items:
   sender_handle = item['user_handle']['S']
   message       = item['message']['S']
   timestamp     = item['sk']['S']
-  dt_object = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%f%z')
+  dt_object = datetime.strptime(timestamp, '%Y-%m-%dT%H:%M:%S.%f')
+  #dt_object = timestamp
   formatted_datetime = dt_object.strftime('%Y-%m-%d %I:%M %p')
+  #formatted_datetime = dt_object
   print(f'{sender_handle: <16}{formatted_datetime: <22}{message[:40]}...')

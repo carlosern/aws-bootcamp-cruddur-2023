@@ -3,6 +3,8 @@ CORRER LA APP LOCAL
 Conectarse a ECR
 ./bin/ecr/login 
 
+Generar Backend & Fronted .env
+
 Iniciar el Docker Compose
 
 Crear BD postgres local
