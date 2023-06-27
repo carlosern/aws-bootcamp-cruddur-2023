@@ -40,8 +40,10 @@ tasks:
       sudo dpkg -i session-manager-plugin.deb
       cd backend-flask      
   - name: cdk
-    command: |
+    before: |
       npm install -g aws-cdk   
+      cd thumbing-serverless-cdk
+      npm i
 ports:
   - name: frontend
     port: 3000
