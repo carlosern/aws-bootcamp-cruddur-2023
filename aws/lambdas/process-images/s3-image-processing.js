@@ -2,7 +2,7 @@ const sharp = require('sharp');
 const { S3Client, PutObjectCommand, GetObjectCommand } = require("@aws-sdk/client-s3");
 
 function getClient(){
-  const client = new S3Client();
+  const client = new S3Client({region: "us-east-2"});
   return client;
 }
 
