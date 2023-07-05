@@ -4,6 +4,8 @@ Conectarse a ECR
 ./bin/ecr/login 
 
 Generar Backend & Fronted .env
+./bin/fronted/generate-env
+./bin/backend/generate-env
 
 Iniciar el Docker Compose
 
