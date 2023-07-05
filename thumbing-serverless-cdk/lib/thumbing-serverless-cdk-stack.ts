@@ -35,6 +35,8 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     console.log('webhookUrl',webhookUrl)
     console.log('topicName',topicName)
     console.log('functionPath',functionPath)
+    console.log('functionPath2',functionPath)
+
 
     const uploadsBucket = this.createBucket(uploadsBucketName);
     const assetsBucket = this.importBucket(assetsBucketName);
@@ -83,7 +85,7 @@ export class ThumbingServerlessCdkStack extends cdk.Stack {
     assetsBucketName: string,
     folderInput: string,
     folderOutput: string) : lambda.IFunction{
-    const lambdaFunction = new lambda.Function(this, 'ThumbLambda', {
+    const lambdaFunction = new lambda.Function(this, 'ThumbLambda1', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
       code: lambda.Code.fromAsset(functionPath),

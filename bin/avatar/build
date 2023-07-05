@@ -4,9 +4,13 @@ ABS_PATH=$(readlink -f "$0")
 SERVERLESS_PATH=$(dirname $ABS_PATH)
 BIN_PATH=$(dirname $SERVERLESS_PATH)
 PROJECT_PATH=$(dirname $BIN_PATH)
-SERVERLESS_PROJECT_PATH="$PROJECT_PATH/thumbing-serverless-cdk"
+SERVERLESS_PROJECT_PATH="$PROJECT_PATH/aws/lambdas/process-images"
+
+echo "SERVERLESS_PROJECT_PATH"
+echo $SERVERLESS_PROJECT_PATH
 
 cd $SERVERLESS_PROJECT_PATH
+
 
 npm install
 rm -rf node_modules/sharp
