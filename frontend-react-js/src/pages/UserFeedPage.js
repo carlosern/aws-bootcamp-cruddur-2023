@@ -7,6 +7,7 @@ import DesktopSidebar     from '../components/DesktopSidebar';
 import ActivityFeed from '../components/ActivityFeed';
 import ActivityForm from '../components/ActivityForm';
 import EditProfileButton from '../components/EditProfileButton';
+import ProfileHeading from '../components/ProfileHeading';
 
 // [TODO] Authenication
 //import Cookies from 'js-cookie'
@@ -14,8 +15,9 @@ import {checkAuth, getAccessToken}  from '../lib/CheckAuth'
 
 export default function UserFeedPage() {
   const [activities, setActivities] = React.useState([]);
-  const [profile, setProfile] = React.useState();
+  const [profile, setProfile] = React.useState({a:1});
   const [popped, setPopped] = React.useState([]);
+  const [poppedProfile, setPoppedProfile] = React.useState([]);
   const [user, setUser] = React.useState(null);
   const dataFetchedRef = React.useRef(false);
 
@@ -35,10 +37,13 @@ export default function UserFeedPage() {
       });
       let resJson = await res.json();
       if (res.status === 200) {
+        console.log('resJson BEFORE',resJson)
+        console.log('resJson.profile',resJson.profile)
         setProfile(resJson.profile)
         setActivities(resJson.activities)
-        console.log('setprofile',resJson.profile)
-        console.log('setActivities',resJson.activities)
+        console.log('setProfile',profile)
+        console.log('setActivities',activities)
+        console.log('resJson',resJson)
       } else {
         console.log(res)
       }
@@ -96,11 +101,12 @@ export default function UserFeedPage() {
           popped={poppedProfile} 
           setPopped={setPoppedProfile} 
         /> */}
-                <div className='activity_feed_heading'>
-          <div className='title'>Profilee</div>
+          <div className='activity_feed_heading'>
+          <div className='title'>{profile.display_name}</div>
+          <div className='title'>{profile.cruds_count} Cruds</div>
         </div>
         <div className='activity_feed'>
-          {/* <ProfileHeading setPopped={setPoppedProfile} profile={profile} /> */}
+          <ProfileHeading setPopped={setPoppedProfile} profile={profile} />
           <ActivityFeed activities={activities} />
         </div>
       </div>
