@@ -11,6 +11,9 @@ COPY start.sh start.sh
 COPY . .
 
 EXPOSE ${PORT}
-CMD sh start.sh
-#CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0", "--port=4567"]
+
+ENV PYTHONUNBUFFERED=1
+
+#CMD sh start.sh
+CMD [ "python3", "-m" , "flask", "run",  "--host=0.0.0.0", "--port=4567", "--debug"]
 
