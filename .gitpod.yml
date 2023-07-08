@@ -17,12 +17,12 @@ tasks:
       cd $THEIA_WORKSPACE_ROOT
   - name: reactjs
     command: |
-      source  "$THEIA_WORKSPACE_ROOT/bin/frontend/generate-env"
+      "$THEIA_WORKSPACE_ROOT/bin/frontend/generate-env"
       cd frontend-react-js
       npm i
   - name: flask
     command: |
-      source  "$THEIA_WORKSPACE_ROOT/bin/backend/generate-env"
+      "$THEIA_WORKSPACE_ROOT/bin/backend/generate-env"
       cd backend-flask
       pip install -r requirements.txt
   - name: postgres
@@ -46,6 +46,9 @@ tasks:
       npm install -g aws-cdk   
       cd thumbing-serverless-cdk
       npm i
+  - name: docker
+    before: |
+      "$THEIA_WORKSPACE_ROOT/bin/ecr/login"
 ports:
   - name: frontend
     port: 3000
