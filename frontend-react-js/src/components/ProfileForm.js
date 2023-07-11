@@ -13,9 +13,11 @@ export default function ProfileForm(props) {
   }, [props.profile])
 
   const s3uploadkey = async (extension)=> {
-    console.log('ext',extension)
+    console.log('====s3uploadkey=== ext',extension)
+    debugger
     try {
-      const gateway_url = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT_URL}/avatars/key_upload`
+      //const gateway_url = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT_URL}/avatars/key_upload`
+      const gateway_url = `https://jy3wjqtjf5.execute-api.us-east-2.amazonaws.com/avatars/key_upload`
       await getAccessToken()
       const access_token = localStorage.getItem("access_token")
       const json = {
@@ -42,7 +44,8 @@ export default function ProfileForm(props) {
     }
   }
   const s3upload = async (event)=> {
-    console.log('event',event)
+    debugger
+    console.log('====s3upload=== event',event)
     const file = event.target.files[0]
     const filename = file.name
     const size = file.size
@@ -53,7 +56,7 @@ export default function ProfileForm(props) {
     const extension = fileparts[fileparts.length-1]
     const presignedurl = await s3uploadkey(extension)
     try {
-      console.log('s3upload')
+      console.log('====s3upload=== s3upload')
       const res = await fetch(presignedurl, {
         method: "PUT",
         body: file,
@@ -130,7 +133,7 @@ export default function ProfileForm(props) {
           </div>
           <div className="popup_content">
             
-          <input type="file" name="avatarupload" onChange={s3upload} />
+            <input type="file" name="avatarupload" onChange={s3upload} accept='image/png, image/jpeg' />
 
             <div className="field display_name">
               <label>Display Name</label>
