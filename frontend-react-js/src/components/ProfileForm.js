@@ -16,13 +16,14 @@ export default function ProfileForm(props) {
     console.log('====s3uploadkey=== ext',extension)
     debugger
     try {
-      //const gateway_url = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT_URL}/avatars/key_upload`
-      const gateway_url = `https://jy3wjqtjf5.execute-api.us-east-2.amazonaws.com/avatars/key_upload`
+      const gateway_url = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT_URL}/avatars/key_upload2`
+      //const gateway_url = `https://jy3wjqtjf5.execute-api.us-east-2.amazonaws.com/avatars/key_upload`
       await getAccessToken()
       const access_token = localStorage.getItem("access_token")
       const json = {
         extension: extension
       }
+      console.log(process.env.REACT_APP_FRONTEND_URL)
       const res = await fetch(gateway_url, {
         method: "POST",
         body: JSON.stringify(json),

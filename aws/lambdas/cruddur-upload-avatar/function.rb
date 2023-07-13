@@ -3,6 +3,7 @@ require 'json'
 require 'jwt'
 
 def handler(event:, context:)
+  puts '## EVENT'
   puts event
   # return cors headers for preflight check
   if event['routeKey'] == "OPTIONS /{proxy+}"
