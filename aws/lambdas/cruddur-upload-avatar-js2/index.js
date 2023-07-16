@@ -5,8 +5,11 @@ exports.handler = async (event, context) => {
   console.log('## EVENT');
   console.log(event);
 
+
+
   // Return CORS headers for preflight check
-  if (event.routeKey === "OPTIONS /{proxy+}") {
+  //if (event.routeKey === "OPTIONS /{proxy+}") {
+  if (event.routeKey.includes("OPTIONS")){
     console.log(JSON.stringify({step: 'preflight', message: 'preflight CORS check'}));
 
     return {
@@ -18,7 +21,17 @@ exports.handler = async (event, context) => {
       statusCode: 200
     };
   } else {
-    console.log("BODY", event.body)
+    console.log("GET OR POST", event.body)
+
+  //   return {
+  //     headers: {
+  //       "Access-Control-Allow-Headers": "*, Authorization",
+  //       "Access-Control-Allow-Origin": "https://3000-carlosern-awsbootcampcr-dyakeu68os3.ws-us101.gitpod.io",
+  //       "Access-Control-Allow-Methods": "OPTIONS,GET,POST"
+  //     },
+  //     statusCode: 200
+  //   };
+  // }
     const token = event.headers.authorization.split(' ')[1];
     console.log(JSON.stringify({step: 'presignedurl', access_token: token}));
 
@@ -52,5 +65,5 @@ exports.handler = async (event, context) => {
       statusCode: 200,
       body: body
     };
-  }
+   }
 };

@@ -14,10 +14,11 @@ export default function ProfileForm(props) {
 
   const s3uploadkey = async (extension)=> {
     console.log('====s3uploadkey=== ext',extension)
-    debugger
-    try {
-      const gateway_url = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT_URL}/avatars/key_upload2`
-      //const gateway_url = `https://jy3wjqtjf5.execute-api.us-east-2.amazonaws.com/avatars/key_upload`
+    // debugger
+    // try {
+      const gateway_url = `${process.env.REACT_APP_API_GATEWAY_ENDPOINT_URL}/avatars/key_upload`
+      // const gateway_url = `https://jy3wjqtjf5.execute-api.us-east-2.amazonaws.com/avatars/key_upload`
+      // const gateway_url = `https://ty05kvjnv3.execute-api.us-east-2.amazonaws.com/uploads`
       await getAccessToken()
       const access_token = localStorage.getItem("access_token")
       const json = {
@@ -40,12 +41,11 @@ export default function ProfileForm(props) {
       } else {
         console.log(res)
       }
-    } catch (err) {
-      console.log(err);
-    }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
   const s3upload = async (event)=> {
-    debugger
     console.log('====s3upload=== event',event)
     const file = event.target.files[0]
     const filename = file.name
